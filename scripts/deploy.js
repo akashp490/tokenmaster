@@ -20,28 +20,28 @@ async function main() {
   // List 6 events
   const occasions = [
     {
-      name: "UFC Miami",
+      name: "IPL  2023",
       cost: tokens(3),
       tickets: 0,
       date: "May 31",
       time: "6:00PM EST",
-      location: "Miami-Dade Arena - Miami, FL"
+      location: "Narendra Modi Stadium, Gujarat"
     },
     {
-      name: "ETH Tokyo",
+      name: "FIFA World Cup 2023",
       cost: tokens(1),
       tickets: 125,
       date: "Jun 2",
       time: "1:00PM JST",
-      location: "Tokyo, Japan"
+      location: "Old Trafford, England"
     },
     {
-      name: "ETH Privacy Hackathon",
+      name: "Sunburn Goa 2023",
       cost: tokens(0.25),
       tickets: 200,
       date: "Jun 9",
       time: "10:00AM TRT",
-      location: "Turkey, Istanbul"
+      location: "Vagater Beach, Goa"
     },
     {
       name: "Dallas Mavericks vs. San Antonio Spurs",
@@ -52,12 +52,12 @@ async function main() {
       location: "American Airlines Center - Dallas, TX"
     },
     {
-      name: "ETH Global Toronto",
+      name: "IHL 2023",
       cost: tokens(1.5),
       tickets: 125,
       date: "Jun 23",
       time: "11:00AM EST",
-      location: "Toronto, Canada"
+      location: "Kalinga Stadium, Odisha"
     }
   ]
 

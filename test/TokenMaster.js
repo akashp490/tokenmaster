@@ -1,37 +1,36 @@
 const { expect } = require("chai")
+const { ethers } = require("hardhat")
 
 const NAME = "TokenMaster"
 const SYMBOL = "TM"
 
-const OCCASION_NAME = "ETH Texas"
-const OCCASION_COST = ethers.utils.parseUnits('1', 'ether')
+const OCCASION_NAME = "ETH TEXAS"
+const OCCASION_COST = ethers.utils.parseUnits('1','ether')
 const OCCASION_MAX_TICKETS = 100
 const OCCASION_DATE = "Apr 27"
 const OCCASION_TIME = "10:00AM CST"
 const OCCASION_LOCATION = "Austin, Texas"
 
 describe("TokenMaster", () => {
-  let tokenMaster
+  let TokenMaster
   let deployer, buyer
 
   beforeEach(async () => {
-    // Setup accounts
+    //Setup accounts
     [deployer, buyer] = await ethers.getSigners()
 
-    // Deploy contract
     const TokenMaster = await ethers.getContractFactory("TokenMaster")
-    tokenMaster = await TokenMaster.deploy(NAME, SYMBOL)
+      tokenMaster = await TokenMaster.deploy(NAME, SYMBOL)
 
-    const transaction = await tokenMaster.connect(deployer).list(
+      const transaction = await tokenMaster.connect(deployer).list(
       OCCASION_NAME,
       OCCASION_COST,
       OCCASION_MAX_TICKETS,
       OCCASION_DATE,
       OCCASION_TIME,
       OCCASION_LOCATION
-    )
-
-    await transaction.wait()
+      )
+      await transaction.wait()
   })
 
   describe("Deployment", () => {
@@ -49,6 +48,11 @@ describe("TokenMaster", () => {
   })
 
   describe("Occasions", () => {
+    it('Updates occasions count', async () => {
+      const totalOccasions = await tokenMaster.totalOccasions()
+      expect(totalOccasions).to.be.equal(1)
+    })
+
     it('Returns occasions attributes', async () => {
       const occasion = await tokenMaster.getOccasion(1)
       expect(occasion.id).to.be.equal(1)
@@ -60,10 +64,6 @@ describe("TokenMaster", () => {
       expect(occasion.location).to.be.equal(OCCASION_LOCATION)
     })
 
-    it('Updates occasions count', async () => {
-      const totalOccasions = await tokenMaster.totalOccasions()
-      expect(totalOccasions).to.be.equal(1)
-    })
   })
 
   describe("Minting", () => {
@@ -101,7 +101,9 @@ describe("TokenMaster", () => {
       const balance = await ethers.provider.getBalance(tokenMaster.address)
       expect(balance).to.be.equal(AMOUNT)
     })
+
   })
+
 
   describe("Withdrawing", () => {
     const ID = 1
@@ -129,4 +131,5 @@ describe("TokenMaster", () => {
       expect(balance).to.equal(0)
     })
   })
+
 })
